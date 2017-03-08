@@ -132,7 +132,7 @@ getOptions argv =
      let akey  = view optAwsAccessKey opts
          skey  = view optAwsSecretKey opts
          creds = FromKeys akey skey
-     e <- newEnv (view optAwsRegion opts) creds
+     e <- newEnv creds
      let region = toText (view optS3Zone opts)
          zoneRequest = set dazZoneNames [region] describeAvailabilityZones
      r <- catch ((runResourceT . runAWS e) (send zoneRequest))
